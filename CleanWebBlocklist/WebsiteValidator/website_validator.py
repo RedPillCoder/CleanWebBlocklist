@@ -107,10 +107,10 @@ def check_url(url, session, valid_file):
     return url, "Max retries exceeded"
 
 def main():
-    input_file = r"C:\Users\WDAGUtilityAccount\Documents\CheckWebsites\Websites\websites.txt"
-    valid_file = r"C:\Users\WDAGUtilityAccount\Documents\CheckWebsites\Valid_Websites\valid_websites.txt"
-    invalid_file = r"C:\Users\WDAGUtilityAccount\Documents\CheckWebsites\Invalid_Websites\invalid_websites.txt"
-    network_issue_file = r"C:\Users\WDAGUtilityAccount\Documents\CheckWebsites\Network_Issues\network_issues.txt"
+    input_file = r"C:\Users\WDAGUtilityAccount\Documents\WebsiteValidator\Websites\websites.txt"
+    valid_file = r"C:\Users\WDAGUtilityAccount\Documents\WebsiteValidator\Valid_Websites\valid_websites.txt"
+    invalid_file = r"C:\Users\WDAGUtilityAccount\Documents\WebsiteValidator\Invalid_Websites\invalid_websites.txt"
+    network_issue_file = r"C:\Users\WDAGUtilityAccount\Documents\WebsiteValidator\Network_Issues\network_issues.txt"
 
     # Ensure input file exists
     if not os.path.exists(input_file):
