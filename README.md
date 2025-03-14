@@ -1,2 +1,2 @@
 # CleanWebBlocklist
-This project creates a blocklist of 18+ sexual and pornographic content to promote safer online experiences and help users filter explicit material.
+This project creates a blocklist of 18+ sexual and pornographic content to promote safer online experiences and help users filter explicit material. **All websites included in this blocklist have been personally verified by me to ensure their content aligns with the project's purpose.** By using this list, you can trust that the entries have been carefully reviewed and are intended to provide a safer browsing environment.
