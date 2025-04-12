@@ -39,8 +39,8 @@ def contains_required_content(text):
         "Lesbian", "Anal", "Big Ass", "Big Tits", "Asian", "Latina", "Ebony", "Mature", "Threesome",
         "Creampie", "Cosplay", "Transgender", "Animation/Anime", "3D videos", "Step Mom", "Step Dad",
         "Teacher/Student", "Real Amateur", "Gangbangs", "BBW", "BDSM", "Bondage", "Discipline",
-        "Sadism", "Masochism", "Fetish", "feet", "latex", "JOI", "Jerk Off Instruction", "Pegging",
-        "Facesitting", "Futanari", "Blow Job", "Horny", "Slutty"
+        "Sadism", "Masochism", "Fetish", "Feet", "Latex", "JOI", "Jerk Off Instruction", "Pegging",
+        "Facesitting", "Futanari", "Blow Job", "Horny", "Slutty", "Boobs", "Gloryhole", "Prostitute", "Deepthroat"
     ]
     pattern = r'\b(?:' + '|'.join(re.escape(keyword) for keyword in keywords) + r')\b'
     return bool(re.search(pattern, text, re.IGNORECASE))
