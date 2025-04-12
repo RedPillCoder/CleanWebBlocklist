@@ -46,46 +46,46 @@ def contains_required_content(text):
     return bool(re.search(pattern, text, re.IGNORECASE))
 
 def is_valid_url(url, session):
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
+    }
     try:
-        parsed = urlparse(url)
-        if not parsed.scheme:
-            url = 'http://' + url
-        
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-        }
-        
-        try:
-            ip = socket.gethostbyname(parsed.netloc)
-            logging.info(f"Resolved {parsed.netloc} to {ip}")
-        except socket.gaierror:
-            raise InvalidWebsiteError(f"Failed to resolve {parsed.netloc}")
-        
-        response = session.get(url, timeout=15, allow_redirects=True, headers=headers, verify=False)
-        
-        if response.status_code == 200:
-            content_type = response.headers.get('Content-Type', '')
-            if not content_type.startswith('text/html'):
-                raise InvalidWebsiteError(f"Invalid content type: {content_type}")
-            
-            error_texts = [
-                "hmm. we're having trouble finding that site",
-                "404 not found",
-                "403 forbidden",
-                "site not found",
-                "page not found",
-                "this site can't be reached",
-                "server not found"
-            ]
-            if any(error_text in response.text.lower() for error_text in error_texts):
-                raise InvalidWebsiteError("Error message found in response content")
-            
-            if not contains_required_content(response.text):
-                raise InvalidWebsiteError("Required content not found")
-            
-            return True
-        else:
-            raise InvalidWebsiteError(f"HTTP status code: {response.status_code}")
+        # Prepare both HTTP and HTTPS versions of the URL
+        http_url = f'http://{url}' if not url.startswith('http') else url
+        https_url = f'https://{url}' if not url.startswith('https') else url
+
+        # List of URLs to try
+        urls_to_try = [http_url, https_url]
+
+        for test_url in urls_to_try:
+            try:
+                response = session.get(test_url, timeout=15, allow_redirects=True, headers=headers, verify=False)
+                
+                if response.status_code == 200:
+                    content_type = response.headers.get('Content-Type', '')
+                    if not content_type.startswith('text/html'):
+                        raise InvalidWebsiteError(f"Invalid content type: {content_type}")
+
+                    error_texts = [
+                        "hmm. we're having trouble finding that site",
+                        "404 not found",
+                        "403 forbidden",
+                        "site not found",
+                        "page not found",
+                        "this site can't be reached",
+                        "server not found"
+                    ]
+                    if any(error_text in response.text.lower() for error_text in error_texts):
+                        raise InvalidWebsiteError("Error message found in response content")
+
+                    if not contains_required_content(response.text):
+                        raise InvalidWebsiteError("Required content not found")
+
+                    return True  # Valid if we reach here
+            except requests.RequestException:
+                continue  # Try the next URL in the list
+
+        raise InvalidWebsiteError("Both HTTP and HTTPS failed to connect.")
     except requests.RequestException as e:
         raise NetworkError(f"Network error: {str(e)}")
 
@@ -148,3 +148,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
