@@ -40,7 +40,7 @@ def contains_required_content(text):
         "Creampie", "Cosplay", "Transgender", "Animation/Anime", "3D videos", "Step Mom", "Step Dad",
         "Teacher/Student", "Real Amateur", "Gangbangs", "BBW", "BDSM", "Bondage", "Discipline",
         "Sadism", "Masochism", "Fetish", "feet", "latex", "JOI", "Jerk Off Instruction", "Pegging",
-        "Facesitting", "Futanari", "Blow Job"
+        "Facesitting", "Futanari", "Blow Job", "Horny", "Slutty"
     ]
     pattern = r'\b(?:' + '|'.join(re.escape(keyword) for keyword in keywords) + r')\b'
     return bool(re.search(pattern, text, re.IGNORECASE))
